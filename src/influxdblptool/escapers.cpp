@@ -5,11 +5,12 @@ namespace crosscode::influxdblptool::escapers {
 
     template <char... Ch>
     std::size_t escape_count(std::string_view input) {
-        auto char_count = [](std::size_t& in, const char& inputChar) {
+        
+        auto char_count = [](const std::size_t& in, const char& inputChar) {
             auto needsEscape = [](const char& matchChar) -> bool {
                 return (...||(Ch==matchChar));
             };
-            return in + ((needsEscape(inputChar)?std::size_t{2}:std::size_t{1}));
+            return std::move(in)+((needsEscape(inputChar)?std::size_t{2}:std::size_t{1}));
         };
 
         return std::accumulate(begin(input), end(input),std::size_t{0},char_count);

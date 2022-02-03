@@ -1,5 +1,7 @@
 option(INFLUXDBLPTOOL_ENABLE_CODE_COVERAGE "Set this to ON to build unit tests")
 
+set(CMAKE_CXX_STANDARD 20)   
+
 if (MSVC)
     add_compile_options("$<$<CONFIG:RELEASE>:/W4;/WX>")
     add_compile_options("$<$<CONFIG:DEBUG>:/W4;/WX>")
